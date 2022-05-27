@@ -21,14 +21,20 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/richardpiazza/Perfect-CRUD", from: "2.1.0"),
-        .package(url: "https://github.com/PerfectlySoft/Perfect-sqlite3-support", from: "3.0.0"),
     ],
     targets: [
+        .systemLibrary(
+            name: "CSQLite",
+            pkgConfig: "sqlite3",
+            providers: [
+                .apt(["sqlite3", "libsqlite3-dev"])
+            ]
+        ),
         .target(
             name: "PerfectSQLite",
             dependencies: [
                 .product(name: "PerfectCRUD", package: "Perfect-CRUD"),
-                .productItem(name: "PerfectCSQLite3", package: "Perfect-sqlite3-support", condition: .when(platforms: [.linux]))
+                .target(name: "CSQLite", condition: .when(platforms: [.linux])),
             ]
         ),
         .testTarget(

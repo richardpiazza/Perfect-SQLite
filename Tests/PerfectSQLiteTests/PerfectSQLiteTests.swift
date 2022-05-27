@@ -22,17 +22,18 @@ import XCTest
 import PerfectCRUD
 @testable import PerfectSQLite
 
-let testDBRowCount = 5
-let testDBName = "/tmp/crud_test.db"
-typealias DBConfiguration = SQLiteDatabaseConfiguration
-func getDB(reset: Bool = true) throws -> Database<DBConfiguration> {
-	if reset {
-		unlink(testDBName)
-	}
-	return Database(configuration: try DBConfiguration(testDBName))
-}
-
 class PerfectSQLiteTests: XCTestCase {
+    
+    let testDBRowCount = 5
+    let testDBName = "/tmp/crud_test.db"
+    typealias DBConfiguration = SQLiteDatabaseConfiguration
+    func getDB(reset: Bool = true) throws -> Database<DBConfiguration> {
+        if reset {
+            unlink(testDBName)
+        }
+        return Database(configuration: try DBConfiguration(testDBName))
+    }
+    
 // copy + paste from here into other CRUD driver projects
 	struct TestTable1: Codable, TableNameProvider {
 		enum CodingKeys: String, CodingKey {
@@ -1269,40 +1270,5 @@ class PerfectSQLiteTests: XCTestCase {
 			XCTFail("\(error)")
 		}
 	}
-	
-	static var allTests = [
-		("testCreate1", testCreate1),
-		("testCreate2", testCreate2),
-		("testCreate3", testCreate3),
-		("testSelectAll", testSelectAll),
-		("testSelectIn", testSelectIn),
-		("testSelectLikeString", testSelectLikeString),
-		("testSelectJoin", testSelectJoin),
-		("testInsert1", testInsert1),
-		("testInsert2", testInsert2),
-		("testInsert3", testInsert3),
-		("testUpdate", testUpdate),
-		("testDelete", testDelete),
-		("testSelectLimit", testSelectLimit),
-		("testSelectLimitWhere", testSelectLimitWhere),
-		("testSelectOrderLimitWhere", testSelectOrderLimitWhere),
-		("testSelectWhereNULL", testSelectWhereNULL),
-		("testPersonThing", testPersonThing),
-		("testStandardJoin", testStandardJoin),
-		("testJunctionJoin", testJunctionJoin),
-		("testSelfJoin", testSelfJoin),
-		("testSelfJunctionJoin", testSelfJunctionJoin),
-		("testCodableProperty", testCodableProperty),
-		("testBadDecoding", testBadDecoding),
-		("testAllPrimTypes1", testAllPrimTypes1),
-		("testAllPrimTypes2", testAllPrimTypes2),
-		("testBespokeSQL", testBespokeSQL),
-		("testModelClasses", testModelClasses),
-		("testURL", testURL),
-		("testManyJoins", testManyJoins),
-		("testAssets", testAssets),
-		("testLastInsertId", testLastInsertId),
-		("testEmptyInsert", testEmptyInsert)
-	]
 }
 
