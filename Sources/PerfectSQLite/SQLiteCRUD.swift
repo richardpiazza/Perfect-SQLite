@@ -8,7 +8,7 @@ import Foundation
 import PerfectCRUD
 // Apple platforms have SQLite3 built-in. Linux? No.
 #if os(Linux)
-import PerfectCSQLite3
+import CSQLite
 #else
 import SQLite3
 #endif

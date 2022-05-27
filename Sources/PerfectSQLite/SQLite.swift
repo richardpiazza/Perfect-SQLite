@@ -19,7 +19,7 @@
 
 // Apple platforms have SQLite3 built-in. Linux? No.
 #if os(Linux)
-import PerfectCSQLite3
+import CSQLite
 import SwiftGlibc
 #else
 import SQLite3
